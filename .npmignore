@@ -1,3 +1,7 @@
-test/
 examples/
 *.log
+.cache
+node_modules
+.upm
+.local
+.upm
