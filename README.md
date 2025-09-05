@@ -5,6 +5,7 @@
 ![license](https://img.shields.io/npm/l/better-logify)
 ![GitHub commits](https://img.shields.io/github/commit-activity/m/reversalxx/better-logify)
 ![GitHub stars](https://img.shields.io/github/stars/reversalxx/better-logify?style=social)
+![Support](https://img.shields.io/badge/Support-Discord-7289DA?style=flat&logo=discord)](https://discord.gg/your-invite)
 
 > A professional, flexible logger for Node.js with colorful output, dynamic log types, and customizable timestamp formats.
 
