@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 
-class FlexiLogger {
+class BetterLogify {
   constructor() {
     this.logTypes = new Map();
     this.displayNames = new Map();
@@ -149,5 +149,5 @@ class FlexiLogger {
 }
 
 // Export
-const logger = new FlexiLogger();
+const logger = new BetterLogify();
 module.exports = { logger };
