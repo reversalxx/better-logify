@@ -1,22 +1,25 @@
 const chalk = require('chalk');
+const moment = require('moment');
 
 class BetterLogify {
   constructor() {
     this.logTypes = new Map();
     this.displayNames = new Map();
-    this.timestampStyle = 'big'; // Default to big format
+    this.timestampStyle = 'big'; 
+    this.messageColor = '#2277FF'; 
     this.initDefaults();
   }
 
   // Initialize default log types
   initDefaults() {
     const defaults = {
-      log: { color: '#AAAAAA', display: 'LOG' },
-      info: { color: '#3498DB', display: 'INFO' },
-      warn: { color: '#F39C12', display: 'WARN' },
-      error: { color: '#E74C3C', display: 'ERROR' },
-      debug: { color: '#2ECC71', display: 'DEBUG' },
-      success: { color: '#27AE60', display: 'SUCCESS' }
+      log: { color: '#AAAAAA', display: 'LOGGER' },
+      info: { color: '#AAAAAA', display: 'INFOS' },
+      warn: { color: '#FFFF00', display: 'WARNS' },
+      error: { color: '#FF0000', display: 'ERROR' },
+      debug: { color: '#90EE90', display: 'DEBUG' },
+      success: { color: '#FF60CC', display: 'SUCCESS' },
+      system: { color: '#AAAAAA', display: 'SYSTEM' },
     };
 
     for (const [type, config] of Object.entries(defaults)) {
@@ -29,40 +32,32 @@ class BetterLogify {
   // Create a log method for a specific type
   createLogMethod(type) {
     return (data) => {
-      this.log(data, type);
+      this._log(data, type);
     };
   }
 
-  // Format timestamp based on current style
+  // Format timestamp using moment.js like original
   getTimestamp() {
-    const now = new Date();
-    
     if (this.timestampStyle === 'small') {
       // Small format: [5-5-25 5:5]
+      const now = new Date();
       const date = `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear().toString().slice(-2)}`;
       const time = `${now.getHours()}:${now.getMinutes()}`;
       return `${date} ${time}`;
     }
     
-    // Default big format: [05-05-2025 05:05:05]
-    const pad = (n) => n.toString().padStart(2, '0');
-    const date = `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()}`;
-    const time = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-    return `${date} ${time}`;
+    // Use moment.js with your original format: HH-DD-MM-YY
+    return moment().utcOffset('+05:30').format('HH-DD-MM-YY');
   }
 
   /**
-   * Core logging function
+   * Core logging function - updated to match original style
    * @param {any} data - Data to log (string, Error, object, etc.)
    * @param {string} type - Logger type
    */
-  log(data, type = 'log') {
-    const timestamp = this.getTimestamp();
-    const color = this.logTypes.get(type) || '#AAAAAA';
-    const display = this.displayNames.get(type) || type.toUpperCase();
-
-    // Format message based on input type
-    let message;
+  _log(data, type = 'log') {
+    // Format message based on input type (same as original)
+    let message = data;
     if (data instanceof Error) {
       message = `${data.message}\n${data.stack}`;
     } else if (typeof data === 'object') {
@@ -71,15 +66,27 @@ class BetterLogify {
       } catch {
         message = String(data);
       }
-    } else {
+    } else if (typeof data !== 'string') {
       message = String(data);
     }
 
-    // Create colured output
-    const timeStr = chalk.gray(timestamp);
-    const prefix = chalk.bgHex(color).black(` ${display} `);
+    const date = this.getTimestamp();
+    const time = chalk.hex('#AAFF22')(date); // Green timestamp like original
     
-    console.log(`[ ${timeStr} ] [${prefix}] ${message}`);
+    const color = this.logTypes.get(type) || '#AAAAAA';
+    const display = this.displayNames.get(type) || type.toUpperCase();
+    const prefix = chalk.bgHex(color)(display);
+    
+    // Output in original format: [ time ] [prefix] message (blue)
+    console.log(`[ ${time} ] [${prefix}] ${chalk.hex(this.messageColor)(message)}`);
+  }
+
+  /**
+   * Set the color for log messages
+   * @param {string} color - Hex color code for messages
+   */
+  setMessageColor(color) {
+    this.messageColor = color;
   }
 
   /**
@@ -143,7 +150,7 @@ class BetterLogify {
     
     client.logs = {};
     for (const [type] of this.logTypes) {
-      client.logs[type] = (data) => this.log(data, type);
+      client.logs[type] = (data) => this._log(data, type);
     }
   }
 }
