@@ -35,10 +35,6 @@ Install via npm:
 
 `npm install better-logify`
 
-or using yarn:
-
-`yarn add better-logify`
-
 ---
 
 ## Features
