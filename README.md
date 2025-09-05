@@ -1,12 +1,32 @@
-# dynamic-logger
+# better-logify
 
-![npm version](https://img.shields.io/npm/v/dynamic-logger)
-![npm downloads](https://img.shields.io/npm/dt/dynamic-logger)
-![license](https://img.shields.io/npm/l/dynamic-logger)
-![GitHub commits](https://img.shields.io/github/commit-activity/m/reversalxx/dynamic-logger)
-![GitHub stars](https://img.shields.io/github/stars/reversalxx/dynamic-logger?style=social)
+![npm version](https://img.shields.io/npm/v/better-logify)
+![npm downloads](https://img.shields.io/npm/dt/better-logify)
+![license](https://img.shields.io/npm/l/better-logify)
+![GitHub commits](https://img.shields.io/github/commit-activity/m/reversalxx/better-logify)
+![GitHub stars](https://img.shields.io/github/stars/reversalxx/better-logify?style=social)
 
-A professional, flexible logger for Node.js with colorful output, dynamic log types, and customizable timestamp formats.
+> A professional, flexible logger for Node.js with colorful output, dynamic log types, and customizable timestamp formats.
+
+---
+
+## Table of Contents
+
+- [Installation](#installation)  
+- [Features](#features)  
+- [Usage](#usage)  
+  - [Importing](#importing)  
+  - [Basic Logging](#basic-logging)  
+  - [Timestamp Customization](#timestamp-customization)  
+  - [Customization](#customization)  
+  - [Discord.js Integration (Optional)](#discordjs-integration-optional)  
+  - [Error Handling](#error-handling)  
+- [API Reference](#api-reference)  
+- [Timestamp Styles](#timestamp-styles)  
+- [Comparison: Big vs Small Timestamp](#comparison-big-vs-small-timestamp)  
+- [Notes](#notes)  
+- [Contributing](#contributing)  
+- [License](#license)
 
 ---
 
@@ -14,18 +34,22 @@ A professional, flexible logger for Node.js with colorful output, dynamic log ty
 
 Install via npm:
 
-`npm install dynamic-logger`
+`npm install better-logify`
+
+or using yarn:
+
+`yarn add better-logify`
 
 ---
 
 ## Features
 
-- **Color-coded logging** for clarity in console output  
-- **Built-in log types**: `log`, `info`, `warn`, `error`, `debug`, `success`  
-- **Custom log types**: add new loggers with your own labels and colors  
-- **Timestamp customization**: choose between `big` or `small` formats  
-- **Optional integration** with Discord.js clients  
-- **Automatic type handling**: strings, objects, and Error objects are formatted automatically  
+- 🌈 **Color-coded logging** for clear and readable console output  
+- 🛠 **Built-in log types**: `log`, `info`, `warn`, `error`, `debug`, `success`  
+- ✨ **Custom log types**: add new loggers with your own labels and colors  
+- ⏰ **Timestamp customization**: choose between `big` or `small` formats  
+- 🤖 **Optional integration** with Discord.js clients  
+- 📝 **Automatic type handling**: strings, objects, and `Error` objects  
 
 ---
 
@@ -33,7 +57,7 @@ Install via npm:
 
 ### Importing
 
-`const { logger } = require('dynamic-logger');`
+`const { logger } = require('better-logify');`
 
 ### Basic Logging
 
@@ -63,14 +87,14 @@ logger.info('Back to big timestamp');
 ### Customization
 
 ```javascript
-// Change the color of an existing logger
+// Change color of an existing logger
 logger.setColor('warn', '#FF00FF');
 
-// Add a new logger type with optional display name
+// Add a new logger type
 logger.addNewLogger('audit', '#FFD700', 'AUDIT');
 logger.audit('User permissions updated');
 
-// List all available loggers and their colors
+// List all available loggers
 console.log(logger.listTypes());
 ```
 
@@ -78,7 +102,7 @@ console.log(logger.listTypes());
 
 ```javascript
 const { Client } = require('discord.js');
-const { logger } = require('dynamic-logger');
+const { logger } = require('better-logify');
 
 const client = new Client();
 
@@ -92,11 +116,9 @@ client.logs.info('Bot is starting up...');
 logger.setTimestampStyle('small');
 ```
 
-> ⚠️ Note: `logger.init(client)` is **only required for Discord.js projects**. For web apps, games, or other Node.js applications, you can use the logger directly without `init`.
+> ⚠️ **Note**: `logger.init(client)` is only needed if you are using a Discord.js bot. For any other Node.js application, you can use `logger` directly.
 
 ### Error Handling
-
-The logger handles various data types automatically:
 
 ```javascript
 // Strings
@@ -124,22 +146,38 @@ logger.debug({ user: 'john', action: 'login' });
 
 ### Methods
 
-- `addNewLogger(name, color, display)` – Add a new custom logger type  
-- `setColor(type, color)` – Change the color of an existing logger  
+- `addNewLogger(name, color, display)` – Add a custom logger type  
+- `setColor(type, color)` – Change color of an existing logger  
 - `setTimestampStyle(style)` – Set timestamp format (`big` or `small`)  
-- `listTypes()` – Returns an object of all logger types and their colors  
-- `init(client)` – Attach all loggers to a client object (optional)
+- `listTypes()` – List all logger types and their colors  
+- `init(client)` – Attach logger to a client object (optional)
 
-### Timestamp Styles
+---
 
-- `big` (default): `[05-05-2025 05:05:05]` – Padded, full date/time with seconds  
-- `small`: `[5-5-25 5:5]` – Minimal, no padding, no seconds
+## Timestamp Styles
+
+- **big** (default): `[05-05-2025 05:05:05]` – padded, full date/time  
+- **small**: `[5-5-25 5:5]` – minimal, shorter format  
+
+---
+
+## Comparison: Big vs Small Timestamp
+
+| Style | Example |
+|-------|---------|
+| **Big** | `[05-05-2025 05:05:05]` |
+| **Small** | `[5-5-25 5:5]` |
 
 ---
 
 ## Notes
 
-- The `init(client)` method is optional and mainly useful for Discord.js bots  
-- This logger works in **any Node.js application**, not just Discord bots  
-- Colors can be changed anytime with `setColor()`  
-- Timestamp style applies to all subsequent log messages
+- Works in **any Node.js application**, not just Discord bots  
+- Colors and timestamp style can be changed anytime with `setColor()`  
+- `init(client)` is optional and only relevant for Discord.js integration  
+
+---
+
+## License
+
+[MIT License](https://opensource.org/licenses/MIT)
