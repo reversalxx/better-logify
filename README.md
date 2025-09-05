@@ -3,8 +3,8 @@
 ![npm version](https://img.shields.io/npm/v/dynamic-logger)
 ![npm downloads](https://img.shields.io/npm/dt/dynamic-logger)
 ![license](https://img.shields.io/npm/l/dynamic-logger)
-![GitHub commits](https://img.shields.io/github/commit-activity/m/<YOUR_USERNAME>/<YOUR_REPO>)
-![GitHub stars](https://img.shields.io/github/stars/<YOUR_USERNAME>/<YOUR_REPO>?style=social)
+![GitHub commits](https://img.shields.io/github/commit-activity/m/reversalxx/dynamic-logger)
+![GitHub stars](https://img.shields.io/github/stars/reversalxx/dynamic-logger?style=social)
 
 A professional, flexible logger for Node.js with colorful output, dynamic log types, and customizable timestamp formats.
 
