@@ -1,4 +1,4 @@
-# flexi-logger
+# dynamic-logger
 
 A professional, flexible logger for Node.js with colorful output, dynamic log types, and customizable timestamp formats.
 
