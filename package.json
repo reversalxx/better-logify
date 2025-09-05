@@ -1,0 +1,37 @@
+{
+  "name": "better-logify",
+  "version": "1.1.0",
+  "description": "Flexible, colorful, and easy-to-use logging for Node.js applications",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "logger",
+    "logging",
+    "chalk",
+    "discord",
+    "colorful",
+    "console",
+    "timestamp",
+    "nodejs",
+    "debug"
+  ],
+  "author": "reversalxp@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reversalxx/better-logify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/reversalxx/better-logify/issues"
+  },
+  "homepage": "https://github.com/reversalxx/better-logify#readme",
+  "dependencies": {
+    "chalk": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
